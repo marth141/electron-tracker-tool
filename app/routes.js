@@ -5,11 +5,14 @@ import App from './containers/App';
 import HomePage from './containers/HomePage';
 import CounterPage from './containers/CounterPage';
 
+// Use exact path on root HomePage so
+// that order can be ignored.
+// Boilerplate will start at root '/' path.
 export default () => (
   <App>
     <Switch>
+      <Route exact path="/" component={HomePage} />
       <Route path="/counter" component={CounterPage} />
-      <Route path="/" component={HomePage} />
     </Switch>
   </App>
 );
