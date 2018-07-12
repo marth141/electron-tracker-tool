@@ -20,11 +20,11 @@ export default class tierSelection extends React.Component {
   render() {
     return (
       <div>
-        <p>Tier Selection</p>
+        <p>Bonus Goal</p>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            Dropdown
-        </DropdownToggle>
+            I want to...
+          </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Header</DropdownItem>
             <DropdownItem disabled>Action</DropdownItem>

@@ -4,11 +4,11 @@ import { Progress } from 'reactstrap';
 const tierProgress = (props) => {
   return (
     <div>
-      <p>Tier Progress</p>
+      <p>Bonus Progress</p>
       <div className="text-center">0%</div>
       <Progress />
       <div className="text-center">25%</div>
-      <Progress value="25" />
+      <Progress value={props} />
       <div className="text-center">50%</div>
       <Progress value={50} />
       <div className="text-center">75%</div>

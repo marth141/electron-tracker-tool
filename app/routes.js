@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import App from './containers/App';
-import HomePage from './components/tracker-mod/DesignTracker';
+import HomePage from './containers/tracker-mod/DesignTracker';
 import CounterPage from './containers/CounterPage';
 
 // Use exact path on root HomePage so
