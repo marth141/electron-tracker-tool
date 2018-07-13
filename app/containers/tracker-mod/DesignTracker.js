@@ -13,30 +13,32 @@ export default class designTracker extends Component {
         <Header />
         <NavBar />
         <br />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <PastAccounts />
+        <div className="container" style={{ overflowY: "scroll" }}>
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <PastAccounts />
+              </div>
+            </div>
+            <br />
+            <div className="row">
+              <div className="col">
+                <CommonErrors />
+              </div>
             </div>
           </div>
           <br />
-          <div className="row">
-            <div className="col">
-              <CommonErrors />
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <TierSelection />
+              </div>
             </div>
-          </div>
-        </div>
-        <br />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <TierSelection />
-            </div>
-          </div>
-          <br />
-          <div className="row">
-            <div className="col">
-              <TierProgress />
+            <br />
+            <div className="row">
+              <div className="col">
+                <TierProgress />
+              </div>
             </div>
           </div>
         </div>
