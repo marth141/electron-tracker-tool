@@ -8,7 +8,7 @@ const tierProgress = (props) => {
       <div className="text-center">0%</div>
       <Progress />
       <div className="text-center">25%</div>
-      <Progress value={props} />
+      <Progress value="25" />
       <div className="text-center">50%</div>
       <Progress value={50} />
       <div className="text-center">75%</div>

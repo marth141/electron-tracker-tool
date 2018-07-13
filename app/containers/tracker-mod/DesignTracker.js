@@ -21,6 +21,7 @@ export default class designTracker extends Component {
             </div>
           </div>
         </div>
+        <br />
         <div className="container">
           <div className="row">
             <div className="col-*">

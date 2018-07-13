@@ -15,7 +15,7 @@ export default class pastAccounts extends Component {
   render() {
     return (
       <div>
-        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Accounts</Button>
+        <Button color="success" onClick={this.toggle} block style={{ marginBottom: '1rem' }}>Accounts</Button>
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBody>

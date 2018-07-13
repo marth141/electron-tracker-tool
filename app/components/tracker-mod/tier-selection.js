@@ -23,14 +23,12 @@ export default class tierSelection extends React.Component {
         <p>Bonus Goal</p>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            I want to...
+            I want to reach...
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Header</DropdownItem>
-            <DropdownItem disabled>Action</DropdownItem>
-            <DropdownItem>Another Action</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Another Action</DropdownItem>
+            <DropdownItem header>Bonus Tier</DropdownItem>
+            <DropdownItem>Bonus 1</DropdownItem>
+            <DropdownItem>Bonus 2</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>

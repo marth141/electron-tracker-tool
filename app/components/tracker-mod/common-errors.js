@@ -15,7 +15,7 @@ export default class commonErrors extends Component {
   render() {
     return (
       <div>
-        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Errors</Button>
+        <Button color="danger" onClick={this.toggle} block style={{ marginBottom: '1rem' }}>Errors</Button>
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBody>
