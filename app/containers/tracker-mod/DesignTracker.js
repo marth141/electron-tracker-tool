@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../../components/tracker-mod/header';
 import NavBar from '../../components/tracker-mod/navbar';
 import PastAccounts from '../../components/tracker-mod/past-accounts';
 import CommonErrors from '../../components/tracker-mod/common-errors';
@@ -9,14 +10,18 @@ export default class designTracker extends Component {
   render() {
     return (
       <div>
+        <Header />
         <NavBar />
         <br />
         <div className="container">
           <div className="row">
-            <div className="col-6">
+            <div className="col">
               <PastAccounts />
             </div>
-            <div className="col-6">
+          </div>
+          <br />
+          <div className="row">
+            <div className="col">
               <CommonErrors />
             </div>
           </div>
@@ -24,14 +29,18 @@ export default class designTracker extends Component {
         <br />
         <div className="container">
           <div className="row">
-            <div className="col-*">
+            <div className="col">
               <TierSelection />
             </div>
+          </div>
+          <br />
+          <div className="row">
             <div className="col">
               <TierProgress />
             </div>
           </div>
         </div>
+        <br />
       </div >
     );
   }

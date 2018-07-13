@@ -20,7 +20,7 @@ export default class tierSelection extends React.Component {
   render() {
     return (
       <div>
-        <p>Bonus Goal</p>
+        <p style={{ color: "#FFFFFF" }}>Bonus Goal</p>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
             I want to reach...

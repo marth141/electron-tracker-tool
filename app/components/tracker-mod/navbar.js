@@ -36,6 +36,15 @@ export default class navbar extends Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink tag={Link} to="/">Easy PV Watts?</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/">AutoHotkey Stuff?</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/">Team Chat?</NavLink>
+              </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options

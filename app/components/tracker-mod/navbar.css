@@ -1,0 +1,7 @@
+.trackerNavbarDrag {
+  -webkit-app-region: drag;
+}
+
+.trackerNavbarNoDrag {
+  -webkit-app-region: no-drag;
+}
