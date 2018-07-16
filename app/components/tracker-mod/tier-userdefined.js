@@ -11,14 +11,11 @@ export default class tierUserDefined extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { value: null };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = event => {
     console.log(event.target.value);
-    this.setState({ value: event.target.value });
   };
 
   render() {
@@ -32,7 +29,6 @@ export default class tierUserDefined extends Component {
                 placeholder="I want to reach..."
                 type="number"
                 step="1"
-                value={this.state.value}
                 onChange={this.handleChange}
               />
               <InputGroupAddon addonType="append">.00</InputGroupAddon>
