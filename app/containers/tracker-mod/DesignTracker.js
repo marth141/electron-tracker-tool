@@ -18,11 +18,6 @@ export default class designTracker extends Component {
             </div>
           </div>
           <br />
-          <div className="row">
-            <div className="col">
-              <TierProgress />
-            </div>
-          </div>
         </div>
         <br />
       </div>
