@@ -12,57 +12,55 @@ export default class tierUserDefined extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
-      goal: null,
-      nintyTierProgress: null,
-      nintyFiveTierProgress: null,
-      test: null
-    }
+      minimumDesigns: 0,
+      designsCompleted: 0,
+      goal: 0,
+      nintyTierProgress: 0,
+      nintyTierEarned: 0,
+      nintyFiveTierProgress: 0,
+      nintyFiveTierEarned: 0,
+      netDesigns: 0
+    };
   }
 
-  setGoal = event => {
-    this.setState({
-      goal: (event.target.value)
-    });
-  }
-
-  setDesignsNinty = event => {
+  setMinimumDesigns = event => {
     const nintyTier = 4;
-    let designsCompletedNinty = (event.target.value);
-
-    if (designsCompletedNinty <= 0) {
-      designsCompletedNinty = 0;
-      this.setState({
-        nintyTierProgress: nintyTier * designsCompletedNinty
-      })
-    } else {
-      this.setState({
-        nintyTierProgress: nintyTier * designsCompletedNinty
-      })
-    }
-  }
-
-  setDesignsNintyFive = event => {
     const nintyFiveTier = 7;
-    let designsCompletedNintyFive = (event.target.value);
-
-    if (designsCompletedNintyFive <= 0) {
-      designsCompletedNintyFive = 0;
+    if (event.target.name === 'Hours') {
+      const minimumDesignsCalc = Math.round(event.target.value / 10 * 15);
       this.setState({
-        nintyFiveTierProgress: nintyFiveTier * designsCompletedNintyFive
-      })
-    } else {
+        minimumDesigns: minimumDesignsCalc,
+        nintyTierProgress:
+          (this.state.designsCompleted - minimumDesignsCalc) * nintyTier,
+        nintyFiveTierProgress:
+          (this.state.designsCompleted - minimumDesignsCalc) * nintyFiveTier
+      });
+    } else if (event.target.name === 'Completed') {
+      const designsInput = event.target.value;
+      const nintyTierCalc =
+        (designsInput - this.state.minimumDesigns) * nintyTier;
+      const nintyFiveTierCalc =
+        (designsInput - this.state.minimumDesigns) * nintyFiveTier;
+      if (designsInput >= this.state.minimumDesigns) {
+        this.setState({
+          nintyTierProgress: nintyTierCalc,
+          nintyTierEarned: nintyTierCalc,
+          nintyFiveTierProgress: nintyFiveTierCalc,
+          nintyFiveTierEarned: nintyFiveTierCalc,
+          netDesigns: designsInput - this.state.minimumDesigns,
+          designsCompleted: designsInput
+        });
+      } else {
+        this.setState({
+          designsCompleted: designsInput
+        });
+      }
+    } else if (event.target.name === 'Goal') {
       this.setState({
-        nintyFiveTierProgress: nintyFiveTier * designsCompletedNintyFive
-      })
+        goal: event.target.value
+      });
     }
-  }
-
-  handleChange = event => {
-    this.setState({
-      test: (event.target.value)
-    })
   };
 
   render() {
@@ -72,50 +70,79 @@ export default class tierUserDefined extends Component {
           <Form>
             <FormGroup>
               <InputGroup>
-                <InputGroupAddon addonType="prepend">My Bonus goal is.....</InputGroupAddon>
+                <InputGroupAddon addonType="prepend">
+                  Hours Worked
+                </InputGroupAddon>
                 <Input
+                  name="Hours"
                   type="number"
                   step="1"
-                  onChange={this.setGoal}
+                  min="0"
+                  placeholder="0"
+                  onChange={this.setMinimumDesigns}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  Designs Completed
+                </InputGroupAddon>
+                <Input
+                  name="Completed"
+                  type="number"
+                  step="1"
+                  min="0"
+                  placeholder="0"
+                  onChange={this.setMinimumDesigns}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">
+                  My Bonus goal is
+                </InputGroupAddon>
+                <Input
+                  name="Goal"
+                  type="number"
+                  step="1"
+                  min="0"
+                  placeholder="0"
+                  onChange={this.setMinimumDesigns}
                 />
                 <InputGroupAddon addonType="append">.00</InputGroupAddon>
-              </InputGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">Designs in 90% Tier</InputGroupAddon>
-                <Input
-                  type="number"
-                  step="1"
-                  onChange={this.setDesignsNinty}
-                />
-              </InputGroup>
-              <InputGroup>
-                <InputGroupAddon addonType="prepend">Designs in 95% Tier</InputGroupAddon>
-                <Input
-                  type="number"
-                  step="1"
-                  onChange={this.setDesignsNintyFive}
-                />
               </InputGroup>
             </FormGroup>
           </Form>
         </div>
         <div>
-          <p style={{ color: '#FFFFFF' }}>Bonus Progress</p>
+          <p style={{ color: '#FFFFFF' }}>
+            Minimum Designs before Bonus: {this.state.minimumDesigns}
+          </p>
+          <div className="text-center text-white">To Bonus Progress</div>
+          <Progress
+            value={this.state.designsCompleted}
+            max={this.state.minimumDesigns}
+          />
+          <div className="text-center text-white">
+            Net Bonus Designs: {this.state.netDesigns}
+          </div>
+          <br />
+          <br />
           <div className="text-center text-white">90% Tier Progress</div>
+          <div className="text-center text-white">
+            ${this.state.nintyTierEarned}
+          </div>
           <Progress
             value={this.state.nintyTierProgress}
             max={this.state.goal}
           />
+          <br />
           <div className="text-center text-white">95% Tier Progress</div>
+          <div className="text-center text-white">
+            ${this.state.nintyFiveTierEarned}
+          </div>
           <Progress
             value={this.state.nintyFiveTierProgress}
             max={this.state.goal}
           />
-          <div className="text-center text-white">Combined</div>
-          <Progress multi>
-            <Progress bar value={this.state.nintyTierProgress} max={this.state.goal} />
-            <Progress bar color="success" value={this.state.nintyFiveTierProgress} max={this.state.goal} />
-          </Progress>
         </div>
       </div>
     );
