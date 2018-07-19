@@ -13,10 +13,56 @@ export default class tierUserDefined extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      goal: null,
+      nintyTierProgress: null,
+      nintyFiveTierProgress: null,
+      test: null
+    }
+  }
+
+  setGoal = event => {
+    this.setState({
+      goal: (event.target.value)
+    });
+  }
+
+  setDesignsNinty = event => {
+    const nintyTier = 4;
+    let designsCompletedNinty = (event.target.value);
+
+    if (designsCompletedNinty <= 0) {
+      designsCompletedNinty = 0;
+      this.setState({
+        nintyTierProgress: nintyTier * designsCompletedNinty
+      })
+    } else {
+      this.setState({
+        nintyTierProgress: nintyTier * designsCompletedNinty
+      })
+    }
+  }
+
+  setDesignsNintyFive = event => {
+    const nintyFiveTier = 7;
+    let designsCompletedNintyFive = (event.target.value);
+
+    if (designsCompletedNintyFive <= 0) {
+      designsCompletedNintyFive = 0;
+      this.setState({
+        nintyFiveTierProgress: nintyFiveTier * designsCompletedNintyFive
+      })
+    } else {
+      this.setState({
+        nintyFiveTierProgress: nintyFiveTier * designsCompletedNintyFive
+      })
+    }
   }
 
   handleChange = event => {
-    console.log(event.target.value);
+    this.setState({
+      test: (event.target.value)
+    })
   };
 
   render() {
@@ -26,38 +72,49 @@ export default class tierUserDefined extends Component {
           <Form>
             <FormGroup>
               <InputGroup>
-                <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                <InputGroupAddon addonType="prepend">My Bonus goal is.....</InputGroupAddon>
                 <Input
-                  placeholder="I want to reach..."
                   type="number"
                   step="1"
-                  onChange={this.handleChange}
+                  onChange={this.setGoal}
                 />
                 <InputGroupAddon addonType="append">.00</InputGroupAddon>
               </InputGroup>
-              <Input type="submit" value="Submit" />
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Designs in 90% Tier</InputGroupAddon>
+                <Input
+                  type="number"
+                  step="1"
+                  onChange={this.setDesignsNinty}
+                />
+              </InputGroup>
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">Designs in 95% Tier</InputGroupAddon>
+                <Input
+                  type="number"
+                  step="1"
+                  onChange={this.setDesignsNintyFive}
+                />
+              </InputGroup>
             </FormGroup>
           </Form>
         </div>
         <div>
           <p style={{ color: '#FFFFFF' }}>Bonus Progress</p>
-          <div className="text-center text-white">0%</div>
-          <Progress />
-          <div className="text-center text-white">25%</div>
-          <Progress value="25" />
-          <div className="text-center text-white">50%</div>
-          <Progress value={50} />
-          <div className="text-center text-white">75%</div>
-          <Progress value={75} />
-          <div className="text-center text-white">100%</div>
-          <Progress value="100" />
-          <div className="text-center text-white">Multiple bars</div>
+          <div className="text-center text-white">90% Tier Progress</div>
+          <Progress
+            value={this.state.nintyTierProgress}
+            max={this.state.goal}
+          />
+          <div className="text-center text-white">95% Tier Progress</div>
+          <Progress
+            value={this.state.nintyFiveTierProgress}
+            max={this.state.goal}
+          />
+          <div className="text-center text-white">Combined</div>
           <Progress multi>
-            <Progress bar value="15" />
-            <Progress bar color="success" value="30" />
-            <Progress bar color="info" value="25" />
-            <Progress bar color="warning" value="20" />
-            <Progress bar color="danger" value="5" />
+            <Progress bar value={this.state.nintyTierProgress} max={this.state.goal} />
+            <Progress bar color="success" value={this.state.nintyFiveTierProgress} max={this.state.goal} />
           </Progress>
         </div>
       </div>
