@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import {} from 'react-router-dom';
+import {} from 'reactstrap';
 import styles from './navbar.css';
 
 export default class navbar extends Component {
@@ -31,7 +19,10 @@ export default class navbar extends Component {
   }
   render() {
     return (
-      <div className={styles.trackerNavbarDrag} style={{ height: "30px", backgroundColor: "#1A1F24" }} />
+      <div
+        className={styles.trackerNavbarDrag}
+        style={{ height: '30px', backgroundColor: '#1A1F24' }}
+      />
     );
   }
 }

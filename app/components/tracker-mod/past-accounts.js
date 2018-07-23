@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse, Button, CardBody, Card, Table } from 'reactstrap';
+import PastAccounts from './input-accounts';
 
 export default class pastAccounts extends Component {
   constructor(props) {
@@ -15,10 +16,18 @@ export default class pastAccounts extends Component {
   render() {
     return (
       <div>
-        <Button color="success" onClick={this.toggle} block style={{ marginBottom: '1rem' }}>Accounts</Button>
+        <Button
+          color="success"
+          onClick={this.toggle}
+          block
+          style={{ marginBottom: '1rem' }}
+        >
+          Accounts
+        </Button>
         <Collapse isOpen={this.state.collapse}>
-          <Card style={{ backgroundColor: "#4F575E" }}>
-            <CardBody style={{ overflowY: "scroll", maxHeight: "300px" }}>
+          <Card style={{ backgroundColor: '#4F575E' }}>
+            <CardBody style={{ overflowY: 'scroll', maxHeight: '300px' }}>
+              <PastAccounts />
               <Table dark>
                 <thead>
                   <tr>
