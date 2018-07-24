@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default class inputAccounts extends Component {
   constructor(props) {
@@ -17,7 +17,11 @@ export default class inputAccounts extends Component {
       <div>
         <Form>
           <FormGroup>
-            <Label color="white">Service Number</Label>
+            <Label style={{ color: '#FFFFFF' }}>Service Number</Label>
+            <Input />
+            <br />
+            <Label style={{ color: '#FFFFFF' }}>Design Type</Label>
+            <Input type="select" />
           </FormGroup>
         </Form>
       </div>
