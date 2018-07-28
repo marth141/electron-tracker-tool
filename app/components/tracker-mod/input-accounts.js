@@ -15,7 +15,10 @@ export default class inputAccounts extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.state = { collapse: false };
+    this.state = {
+      collapse: false,
+      designType: null
+    };
   }
 
   toggle() {
@@ -42,7 +45,14 @@ export default class inputAccounts extends Component {
                   <Input placeholder="Enter Service Number (e.g. 1234567)" />
                   <br />
                   <Label style={{ color: '#FFFFFF' }}>Design Type</Label>
-                  <Input type="select">
+                  <Input
+                    type="select"
+                    onChange={
+                      event => this.setState({
+                        designType: event.target.value
+                      })
+                    }
+                  >
                     <option>Select Design Type</option>
                     <option>CP Match</option>
                     <option>Full Design</option>

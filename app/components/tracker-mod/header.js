@@ -1,15 +1,10 @@
-import React, { Component } from 'react';
-import {} from 'react-router-dom';
-import {} from 'reactstrap';
+import React from 'react';
 import styles from './navbar.css';
 
-export default class header extends Component {
-  render() {
-    return (
-      <div
-        className={styles.trackerNavbarDrag}
-        style={{ height: '30px', backgroundColor: '#1A1F24' }}
-      />
-    );
-  }
+export default () => {
+  return (
+    <div
+      className={styles.trackerNavbarDrag}
+      style={{ height: '30px', backgroundColor: '#1A1F24' }}
+    />)
 }
