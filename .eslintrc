@@ -21,6 +21,7 @@
     "import/no-unresolved": "error",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "linebreak-style": ["windows"],
     "no-console": "off",
     "no-use-before-define": "off",
     "no-multi-assign": "off",
