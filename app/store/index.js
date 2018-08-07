@@ -1,11 +1,11 @@
-import { observable, action, runInAction, computed } from 'mobx';
-import { TimerStore, Timer } from './timer-store';
-import { TrackerStore } from './tracker-store';
+import { observable, action, runInAction } from 'mobx';
+import { TimerStore } from './timer-store';
+import TrackerStore from './tracker-store';
 
 class Store {
   constructor() {
     this.uiStore = new UIStore(this);
-    this.trackerStore = new TrackerStore(this);
+    this.trackerStore = new TrackerStore;
     this.timerStore = new TimerStore(this);
   }
 }

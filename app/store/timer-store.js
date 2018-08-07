@@ -6,6 +6,7 @@ import format from 'format-number-with-string';
 export class Timer {
   @observable
   milliseconds;
+
   @observable
   savedMilliseconds;
 
@@ -51,8 +52,10 @@ export class Timer {
 export class TimerStore {
   @observable
   isRunning;
+
   @observable
   timer;
+
   @observable
   startTime;
 

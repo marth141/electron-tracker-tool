@@ -1,24 +1,36 @@
-import { observable, action, runInAction, computed } from 'mobx';
-var moment = require('moment');
-var momentDurationFormatSetup = require('moment-duration-format');
+import { observable, action, computed } from 'mobx';
+import moment from 'moment';
+import 'moment-duration-format';
 
-export class TrackerStore {
+export default class TrackerStore {
   @observable
-  designerPoints = 0; // Designer's total points
+  designerPoints; // Designer's total points
+
   @observable
-  serviceNumber = undefined; // Designer's service number
+  serviceNumber; // Designer's service number
+
   @observable
-  designType = 'None'; // Designer's design type
+  designType; // Designer's design type
+
   @observable
-  templateType = 'None'; // Designer's template
+  templateType; // Designer's template
+
   @observable
-  accountRecord = [
-    {
-      // Designer's accounts ledger
-      serviceNumber: '1234567',
-      duration: 'Date'
-    }
-  ];
+  accountRecord; // Designer's accounts
+
+  constructor() {
+    this.designerPoints = 0;
+    this.serviceNumber = undefined;
+    this.designType = 'None';
+    this.templateType = 'None';
+    this.accountRecord = [
+      {
+        serviceNumber: '1234567',
+        duration: 'Date'
+      }
+    ];
+  }
+
   accountToAdd = {
     // Account to be added to ledger
     serviceNumber: '',
