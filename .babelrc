@@ -4,7 +4,7 @@
       "env",
       {
         "targets": {
-          "node": 7
+          "node": 10
         },
         "useBuiltIns": true
       }
@@ -14,16 +14,19 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "add-module-exports"
+    "add-module-exports",
+    [
+      "flow-runtime",
+      {
+        "assert": true,
+        "annotate": true
+      }
+    ]
   ],
   "env": {
     "production": {
-      "presets": [
-        "react-optimize"
-      ],
-      "plugins": [
-        "dev-expression"
-      ]
+      "presets": ["react-optimize"],
+      "plugins": ["dev-expression"]
     },
     "development": {
       "plugins": [
