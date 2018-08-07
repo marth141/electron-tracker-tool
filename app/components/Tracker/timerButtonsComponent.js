@@ -17,8 +17,14 @@ export class TimerButtons extends Component<*> {
         <Button
           block
           onClick={() => {
-            this.props.timerStore.startTimer();
-            this.props.tracker.onStartAccount();
+            if (this.props.tracker.serviceNumber.match(/[^$,.\d]/)) {
+              alert('Service number must be 7 digits!');
+            } else if (this.props.tracker.designType.match(/None/)) {
+              alert('Please select a design type for points!');
+            } else {
+              this.props.timerStore.startTimer();
+              this.props.tracker.onStartAccount();
+            }
           }}
         >
           Start

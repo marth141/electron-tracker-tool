@@ -39,12 +39,12 @@ class AccountInput extends Component<*> {
           <br />
           <ServiceNumberEntry />
           <br />
+          <TimerButtons />
+          <br />
           <h1>Current Points: {designerPoints}</h1>
           <h1>To Earn: {pointsToEarn}</h1>
           <Progress value={pointsTotalToEarn} max={400} />
         </AvForm>
-        <br />
-        <TimerButtons />
         <br />
         <div align="center">
           <h1>{this.props.timerStore.mainDisplay}</h1>

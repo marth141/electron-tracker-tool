@@ -24,7 +24,6 @@ export class ServiceNumberEntry extends Component<*> {
             maxLength="7"
             value={serviceNumber}
             onChange={onServiceChange}
-            required
           />
         </FormGroup>
       </div>
