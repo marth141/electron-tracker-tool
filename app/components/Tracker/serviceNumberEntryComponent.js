@@ -21,9 +21,10 @@ export default class ServiceNumberEntry extends Component<*> {
           <AvField
             name="serviceNumberField"
             type="text"
-            pattern="^[0-9]{7}"
+            pattern="[\d]{7}"
             placeholder="Enter Service Number"
             maxLength="7"
+            minLength="7"
             value={serviceNumber}
             onChange={onServiceChange}
           />
