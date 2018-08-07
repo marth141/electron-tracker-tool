@@ -202,6 +202,7 @@
     "prettier": "^1.14.0",
     "react-test-renderer": "^16.4.1",
     "redux-logger": "^3.0.6",
+    "reactstrap": "^6.3.1",
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "sinon": "^6.1.4",
@@ -231,7 +232,6 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.6",
-    "reactstrap": "^6.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "source-map-support": "^0.5.6"
