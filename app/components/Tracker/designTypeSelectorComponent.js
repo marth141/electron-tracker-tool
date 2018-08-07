@@ -7,7 +7,7 @@ import { FormGroup, Input, Label } from 'reactstrap';
   tracker: root.trackerStore
 }))
 @observer
-export class DesignTypeSelection extends Component<*> {
+export default class DesignTypeSelection extends Component<*> {
   render() {
     const { designType, onDesignTypeChange } = this.props.tracker;
     return (

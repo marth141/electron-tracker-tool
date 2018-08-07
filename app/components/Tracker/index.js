@@ -1,13 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import { DesignTypeSelection } from './designTypeSelectorComponent';
-import { TemplateSelection } from './templateSelectorComponent';
-import { ServiceNumberEntry } from './serviceNumberEntryComponent';
-import { TimerButtons } from './timerButtonsComponent';
 import { Progress, Table } from 'reactstrap';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { AvForm } from 'availity-reactstrap-validation';
+import DesignTypeSelection from './designTypeSelectorComponent';
+import TemplateSelection from './templateSelectorComponent';
+import ServiceNumberEntry from './serviceNumberEntryComponent';
+import TimerButtons from './timerButtonsComponent';
 
 @inject(root => ({
   tracker: root.trackerStore,

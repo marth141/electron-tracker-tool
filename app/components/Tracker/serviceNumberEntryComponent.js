@@ -1,14 +1,14 @@
 // @flow
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Label, Input, FormGroup } from 'reactstrap';
+import { Label, FormGroup } from 'reactstrap';
 import { AvField } from 'availity-reactstrap-validation';
 
 @inject(root => ({
   tracker: root.trackerStore
 }))
 @observer
-export class ServiceNumberEntry extends Component<*> {
+export default class ServiceNumberEntry extends Component<*> {
   render() {
     const { serviceNumber, onServiceChange } = this.props.tracker;
     return (

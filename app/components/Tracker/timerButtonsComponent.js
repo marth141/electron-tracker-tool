@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { Button } from 'reactstrap';
 
@@ -10,7 +9,7 @@ import { Button } from 'reactstrap';
   tracker: root.trackerStore
 }))
 @observer
-export class TimerButtons extends Component<*> {
+export default class TimerButtons extends Component<*> {
   render() {
     return (
       <div>

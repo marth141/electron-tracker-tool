@@ -92,7 +92,7 @@ export default class TrackerStore {
 
   // Sets the service number in the account to add record
   @action.bound
-  onStartAccount = e => {
+  onStartAccount = () => {
     this.accountToAdd.serviceNumber = this.serviceNumber;
   };
 

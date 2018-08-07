@@ -7,7 +7,7 @@ import { FormGroup, Input, Label } from 'reactstrap';
   tracker: root.trackerStore
 }))
 @observer
-export class TemplateSelection extends Component<*> {
+export default class TemplateSelection extends Component<*> {
   render() {
     const { onTemplateTypeChange } = this.props.tracker;
     return (
