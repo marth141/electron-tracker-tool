@@ -10,7 +10,9 @@ import { AvField } from 'availity-reactstrap-validation';
 @observer
 export default class ServiceNumberEntry extends Component<*> {
   render() {
-    const { serviceNumber, onServiceChange } = this.props.tracker;
+    const {
+      tracker: { serviceNumber, onServiceChange }
+    } = this.props;
     return (
       <div>
         <FormGroup>

@@ -11,18 +11,29 @@ import { Button } from 'reactstrap';
 @observer
 export default class TimerButtons extends Component<*> {
   render() {
+    const {
+      timerStore,
+      tracker: {
+        serviceNumber,
+        designType,
+        onStartAccount,
+        onEndAccount,
+        accountToAdd
+      },
+      timerTime
+    } = this.props;
     return (
       <div>
         <Button
           block
           onClick={() => {
-            if (this.props.tracker.serviceNumber.match(/[^$,.\d]/)) {
+            if (serviceNumber.match(/[^$,.\d]/) || serviceNumber.match(/^$/)) {
               alert('Service number must be 7 digits!');
-            } else if (this.props.tracker.designType.match(/None/)) {
+            } else if (designType.match(/None/)) {
               alert('Please select a design type for points!');
             } else {
-              this.props.timerStore.startTimer();
-              this.props.tracker.onStartAccount();
+              timerStore.startTimer();
+              onStartAccount();
             }
           }}
         >
@@ -31,7 +42,7 @@ export default class TimerButtons extends Component<*> {
         <Button
           block
           onClick={() => {
-            this.props.timerStore.stopTimer();
+            timerStore.stopTimer();
           }}
         >
           Pause
@@ -39,9 +50,13 @@ export default class TimerButtons extends Component<*> {
         <Button
           block
           onClick={() => {
-            this.props.timerStore.stopTimer();
-            this.props.timerStore.resetTimer();
-            this.props.tracker.onEndAccount(this.props.timerTime);
+            if (accountToAdd.serviceNumber.match(/^$/)) {
+              alert('No account ready to add!');
+            } else {
+              timerStore.stopTimer();
+              timerStore.resetTimer();
+              onEndAccount(timerTime);
+            }
           }}
         >
           End

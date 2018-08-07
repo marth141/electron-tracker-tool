@@ -9,6 +9,7 @@ export default class App extends Component<*> {
   };
 
   render() {
+    const { children } = this.props;
     return (
       <div>
         <DevTools
@@ -17,7 +18,7 @@ export default class App extends Component<*> {
             right: 20
           }}
         />
-        <div>{this.props.children}</div>
+        <div>{children}</div>
       </div>
     );
   }

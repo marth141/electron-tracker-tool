@@ -20,7 +20,7 @@ export default class TrackerStore {
 
   constructor() {
     this.designerPoints = 0;
-    this.serviceNumber = undefined;
+    this.serviceNumber = '';
     this.designType = 'None';
     this.templateType = 'None';
     this.accountRecord = [
@@ -106,5 +106,9 @@ export default class TrackerStore {
     this.designerPoints += this.pointsToEarn; // Adds points to designer's point total
     this.serviceNumber = ''; // Resets the service number DOM
     this.designType = 'None'; // Resets the design type DOM
+    this.accountToAdd = {
+      serviceNumber: '',
+      duration: ''
+    };
   };
 }

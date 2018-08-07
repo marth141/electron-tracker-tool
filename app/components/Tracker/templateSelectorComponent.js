@@ -9,7 +9,9 @@ import { FormGroup, Input, Label } from 'reactstrap';
 @observer
 export default class TemplateSelection extends Component<*> {
   render() {
-    const { onTemplateTypeChange } = this.props.tracker;
+    const {
+      tracker: { onTemplateTypeChange }
+    } = this.props;
     return (
       <div>
         <FormGroup>

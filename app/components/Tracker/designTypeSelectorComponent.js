@@ -9,7 +9,9 @@ import { FormGroup, Input, Label } from 'reactstrap';
 @observer
 export default class DesignTypeSelection extends Component<*> {
   render() {
-    const { designType, onDesignTypeChange } = this.props.tracker;
+    const {
+      tracker: { designType, onDesignTypeChange }
+    } = this.props;
     return (
       <div>
         <FormGroup>

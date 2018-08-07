@@ -16,11 +16,14 @@ import TimerButtons from './timerButtonsComponent';
 class AccountInput extends Component<*> {
   render() {
     const {
-      accountRecord,
-      designerPoints,
-      pointsToEarn,
-      pointsTotalToEarn
-    } = this.props.tracker;
+      tracker: {
+        accountRecord,
+        designerPoints,
+        pointsToEarn,
+        pointsTotalToEarn
+      },
+      timerStore: { mainDisplay }
+    } = this.props;
     const tableData = accountRecord.map((record, index) => {
       return (
         <tr key={index}>
@@ -46,7 +49,7 @@ class AccountInput extends Component<*> {
         </AvForm>
         <br />
         <div align="center">
-          <h1>{this.props.timerStore.mainDisplay}</h1>
+          <h1>{mainDisplay}</h1>
         </div>
         <br />
         <Table dark>
