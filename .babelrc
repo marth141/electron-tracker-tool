@@ -3,26 +3,14 @@
     [
       "env",
       {
-        "targets": {
-          "node": 10
-        },
+        "targets": { "node": 10 },
         "useBuiltIns": true
       }
     ],
     "stage-0",
     "react"
   ],
-  "plugins": [
-    "transform-decorators-legacy",
-    "add-module-exports",
-    [
-      "flow-runtime",
-      {
-        "assert": true,
-        "annotate": true
-      }
-    ]
-  ],
+  "plugins": ["transform-decorators-legacy", "add-module-exports"],
   "env": {
     "production": {
       "presets": ["react-optimize"],
