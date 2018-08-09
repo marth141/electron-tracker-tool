@@ -1,11 +1,12 @@
 import { observable, action, runInAction } from 'mobx';
+import { create } from 'mobx-persist';
 import { TimerStore } from './timer-store';
 import TrackerStore from './tracker-store';
 
 class Store {
   constructor() {
     this.uiStore = new UIStore(this);
-    this.trackerStore = new TrackerStore;
+    this.trackerStore = new TrackerStore();
     this.timerStore = new TimerStore(this);
   }
 }
@@ -58,3 +59,14 @@ class Counter {
 const store = new Store();
 
 export default store;
+
+const hydrate = create({
+  storage: localStorage,
+  jsonify: true
+});
+
+const initialState = {
+  accountRecord: [{ serviceNumber: undefined, duration: undefined }]
+};
+
+hydrate('accountRecord', store.trackerStore);

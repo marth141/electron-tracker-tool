@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx';
+import { persist } from 'mobx-persist';
 import moment from 'moment';
 import 'moment-duration-format';
 
@@ -15,20 +16,20 @@ export default class TrackerStore {
   @observable
   templateType; // Designer's template
 
+  @persist('object')
   @observable
-  accountRecord; // Designer's accounts
+  accountRecord = [
+    {
+      serviceNumber: '1234567',
+      duration: '01:05:00'
+    }
+  ];
 
   constructor() {
     this.designerPoints = 0;
     this.serviceNumber = '';
     this.designType = 'None';
     this.templateType = 'None';
-    this.accountRecord = [
-      {
-        serviceNumber: '1234567',
-        duration: 'Date'
-      }
-    ];
   }
 
   accountToAdd = {
