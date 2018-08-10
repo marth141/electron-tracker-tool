@@ -7,6 +7,10 @@ import DesignTypeSelection from './designTypeSelectorComponent';
 import TemplateSelection from './templateSelectorComponent';
 import ServiceNumberEntry from './serviceNumberEntryComponent';
 import TimerButtons from './timerButtonsComponent';
+import ResetPointsButton from './pointsResetComponent';
+import ResetAccountsTable from './tableResetComponent';
+import CreateDesignDirButton from './templateGetComponent';
+import SetTemplateButton from './templateSetDirectoryComponent';
 
 @inject(root => ({
   tracker: root.trackerStore,
@@ -39,11 +43,15 @@ class AccountInput extends Component<*> {
           <br />
           <TemplateSelection />
           <br />
+          <SetTemplateButton />
+          <CreateDesignDirButton />
+          <br />
           <ServiceNumberEntry />
           <br />
           <TimerButtons />
           <br />
           <h1>Current Points: {designerPoints}</h1>
+          <ResetPointsButton />
           <h1>To Earn: {pointsToEarn}</h1>
           <Progress value={pointsTotalToEarn} max={400} />
         </AvForm>
@@ -51,6 +59,8 @@ class AccountInput extends Component<*> {
         <div align="center">
           <h1>{mainDisplay}</h1>
         </div>
+        <br />
+        <ResetAccountsTable />
         <br />
         <Table dark>
           <thead>

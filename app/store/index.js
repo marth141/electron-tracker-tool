@@ -69,4 +69,4 @@ const initialState = {
   accountRecord: [{ serviceNumber: undefined, duration: undefined }]
 };
 
-hydrate('accountRecord', store.trackerStore);
+hydrate('TrackerStoreMemory', store.trackerStore);

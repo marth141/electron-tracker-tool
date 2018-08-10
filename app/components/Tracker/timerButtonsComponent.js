@@ -29,7 +29,11 @@ export default class TimerButtons extends Component<*> {
           onClick={() => {
             if (designType.match(/None/)) {
               alert('Please select a design type for points!');
-            } else if (serviceNumber.length < 7 || serviceNumber.match(/^$/)) {
+            } else if (
+              serviceNumber.length < 7 ||
+              serviceNumber.match(/^$/) ||
+              serviceNumber.match(/[a-zA-Z]/)
+            ) {
               alert('Service number must be 7 digits!');
             } else {
               timerStore.startTimer();

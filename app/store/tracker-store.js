@@ -1,11 +1,21 @@
 import { observable, action, computed } from 'mobx';
 import { persist } from 'mobx-persist';
+import swal from 'sweetalert';
 import moment from 'moment';
 import 'moment-duration-format';
 
+const dialog = require('electron').remote.dialog;
+const fs = require('fs');
+const path = require('path');
+
 export default class TrackerStore {
+  @persist('object')
   @observable
   designerPoints; // Designer's total points
+
+  @persist('object')
+  @observable
+  templateFolder;
 
   @observable
   serviceNumber; // Designer's service number
@@ -19,10 +29,10 @@ export default class TrackerStore {
   @persist('object')
   @observable
   accountRecord = [
-    {
-      serviceNumber: '1234567',
-      duration: '01:05:00'
-    }
+    // {
+    //   serviceNumber: '1234567',
+    //   duration: '01:05:00'
+    // }
   ];
 
   constructor() {
@@ -51,7 +61,8 @@ export default class TrackerStore {
   // Shows designer's points + to be earned points based on design type
   @computed
   get pointsTotalToEarn() {
-    for (var category in this.points) {
+    var category;
+    for (category in this.points) {
       if (this.designType === category) {
         return this.designerPoints + this.points[category];
       }
@@ -61,7 +72,8 @@ export default class TrackerStore {
   // Displays the points that the selected design type yields
   @computed
   get pointsToEarn() {
-    for (var pointCategory in this.points) {
+    var pointCategory;
+    for (pointCategory in this.points) {
       if (this.designType === pointCategory) {
         return this.points[pointCategory];
       }
@@ -97,6 +109,60 @@ export default class TrackerStore {
     this.accountToAdd.serviceNumber = this.serviceNumber;
   };
 
+  @action.bound
+  resetDesignerPoints = () => {
+    const oldPoints = this.designerPoints;
+    swal({
+      title: 'Are you sure?',
+      text: 'Once reset, you will not be able to recover your points!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then(willReset => {
+        if (willReset) {
+          swal('Your points have reset.', {
+            icon: 'success'
+          });
+          this.designerPoints = 0;
+        } else if (!willReset) {
+          swal('Your points are safe.');
+          return oldPoints;
+        }
+        return oldPoints;
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+
+  @action.bound
+  resetAccountsRecord = () => {
+    const oldRecord = this.accountRecord;
+    swal({
+      title: 'Are you sure?',
+      text: 'Once reset, you will not be able to recover your account table!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then(willReset => {
+        if (willReset) {
+          swal('Your account log has reset.', {
+            icon: 'success'
+          });
+          this.accountRecord = [];
+        } else if (!willReset) {
+          swal('Your account log is safe.');
+          return oldRecord;
+        }
+        return oldRecord;
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+
   // Will end the account's timer and record the duration in ledger
   @action.bound
   onEndAccount = timerTime => {
@@ -111,5 +177,58 @@ export default class TrackerStore {
       serviceNumber: '',
       duration: ''
     };
+  };
+
+  @action.bound
+  setTemplateFolder = () => {
+    dialog.showOpenDialog(
+      {
+        title: 'Select a folder',
+        properties: ['openDirectory']
+      },
+      folderPaths => {
+        // folderPaths is an array that contains all the selected paths
+        if (folderPaths === undefined) {
+          console.log('No destination folder selected');
+        } else {
+          console.log(`${folderPaths}`);
+          this.templateFolder = folderPaths;
+        }
+        // TODO: Copy templates to new service number folder.
+      }
+    );
+  };
+
+  @action.bound
+  selectTemplateFolder = () => {
+    dialog.showOpenDialog(
+      {
+        title: 'Select a folder',
+        properties: ['openDirectory']
+      },
+      folderPaths => {
+        // folderPaths is an array that contains all the selected paths
+        if (folderPaths === undefined) {
+          console.log('No destination folder selected');
+        } else if (
+          this.serviceNumber.length < 7 ||
+          this.serviceNumber.match(/^$/) ||
+          this.serviceNumber.match(/[a-zA-Z]/)
+        ) {
+          alert('Need a valid service number!');
+        } else {
+          console.log(`${folderPaths}/${this.serviceNumber}`);
+          fs.mkdir(`${folderPaths}/${this.serviceNumber}`, error => {
+            if (error) {
+              console.log(error);
+              alert("Directory wasn't made.");
+            } else {
+              alert('Directory created!');
+            }
+          });
+          // TODO: Copy templates to new service number folder.
+        }
+      }
+    );
   };
 }

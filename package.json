@@ -213,6 +213,7 @@
     "stylefmt": "^6.0.2",
     "stylelint": "^9.4.0",
     "stylelint-config-standard": "^18.2.0",
+    "sweetalert": "^2.1.0",
     "uglifyjs-webpack-plugin": "1.2.7",
     "url-loader": "^1.0.1",
     "webpack": "^4.16.3",
