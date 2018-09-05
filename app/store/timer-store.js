@@ -42,7 +42,7 @@ export class Timer {
     const minutes = parseInt(seconds / 60, 10);
     const hours = parseInt(minutes / 60, 10);
 
-    return `${(hours, '00')} : ${(minutes, '00')} : ${format(
+    return `${format(hours % 60, '00')} : ${format(minutes % 60, '00')} : ${format(
       seconds % 60,
       '00'
     )} :  ${format(tenMilliSeconds % 100, '00')}`;
