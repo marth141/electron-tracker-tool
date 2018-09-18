@@ -11,6 +11,7 @@ import ResetPointsButton from './pointsResetComponent';
 import ResetAccountsTable from './tableResetComponent';
 import CreateDesignDirButton from './templateGetComponent';
 import SetTemplateButton from './templateSetDirectoryComponent';
+import WorkdayTimeEntry from './workdayTimeEntryComponent';
 
 @inject(root => ({
   tracker: root.trackerStore,
@@ -24,18 +25,18 @@ class AccountInput extends Component<*> {
         accountRecord,
         designerPoints,
         pointsToEarn,
-        pointsTotalToEarn
+        pointsTotalToEarn,
+        workdayEfficiency,
+        stopwatchEfficiency
       },
       timerStore: { mainDisplay }
     } = this.props;
-    const tableData = accountRecord.map((record, index) => {
-      return (
-        <tr key={index}>
-          <td>{record.serviceNumber}</td>
-          <td>{record.duration}</td>
-        </tr>
-      );
-    });
+    const tableData = accountRecord.map(record => (
+      <tr key={record.id}>
+        <td>{record.serviceNumber}</td>
+        <td>{record.duration}</td>
+      </tr>
+    ));
     return (
       <div>
         <AvForm>
@@ -43,23 +44,29 @@ class AccountInput extends Component<*> {
           <br />
           <TemplateSelection />
           <br />
-          <SetTemplateButton />
-          <CreateDesignDirButton />
-          <br />
           <ServiceNumberEntry />
           <br />
           <TimerButtons />
-          <br />
-          <h1>Current Points: {designerPoints}</h1>
-          <ResetPointsButton />
-          <h1>To Earn: {pointsToEarn}</h1>
-          <Progress value={pointsTotalToEarn} max={400} />
         </AvForm>
+        <br />
+        <SetTemplateButton />
+        <CreateDesignDirButton />
+        <br />
+        <AvForm>
+          <WorkdayTimeEntry />
+        </AvForm>
+        <p>Workday Efficiency: {workdayEfficiency}</p>
+        <p>Stopwatch Efficiency: {stopwatchEfficiency}</p>
+        <br />
+        <h1>Current Points: {designerPoints}</h1>
+        <h1>To Earn: {pointsToEarn}</h1>
+        <Progress value={pointsTotalToEarn} max={400} />
         <br />
         <div align="center">
           <h1>{mainDisplay}</h1>
         </div>
         <br />
+        <ResetPointsButton />
         <ResetAccountsTable />
         <br />
         <Table dark>

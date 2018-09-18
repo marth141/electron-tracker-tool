@@ -31,8 +31,17 @@ export default class TrackerStore {
 
   @persist('object')
   @observable
+  workdayTime;
+
+  @persist('object')
+  @observable
+  stopwatchTime;
+
+  @persist('object')
+  @observable
   accountRecord = [
     // {
+    //   id: 0,
     //   serviceNumber: '1234567',
     //   duration: '01:05:00'
     // }
@@ -43,10 +52,12 @@ export default class TrackerStore {
     this.serviceNumber = '';
     this.designType = 'None';
     this.templateType = 'None';
+    this.stopwatchTime = 0;
   }
 
   accountToAdd = {
     // Account to be added to ledger
+    id: '',
     serviceNumber: '',
     duration: ''
   };
@@ -83,9 +94,34 @@ export default class TrackerStore {
     }
   }
 
+  @computed
+  get workdayEfficiency() {
+    if (this.designerPoints === 0) {
+      return 0;
+    }
+    const adjustedPointGoal = (this.workdayTime / 8) * 420;
+    const workdayEfficiency = this.designerPoints / adjustedPointGoal;
+    return workdayEfficiency;
+  }
+
+  @computed
+  get stopwatchEfficiency() {
+    if (this.designerPoints === 0) {
+      return 0;
+    }
+    const adjustedPointGoal = (this.stopwatchTime / this.workdayTime) * 420;
+    const stopwatchEffResult = this.designerPoints / adjustedPointGoal;
+    return stopwatchEffResult;
+  }
+
   @action.bound
   onInvalid = e => {
     console.log(e.target);
+  };
+
+  @action.bound
+  onWorkdayTimeChange = e => {
+    this.workdayTime = e.target.value;
   };
 
   // Changes the state for the service number when it's typed
@@ -109,6 +145,7 @@ export default class TrackerStore {
   // Sets the service number in the account to add record
   @action.bound
   onStartAccount = () => {
+    this.accountToAdd.id = this.accountRecord.length;
     this.accountToAdd.serviceNumber = this.serviceNumber;
   };
 
@@ -128,6 +165,7 @@ export default class TrackerStore {
             icon: 'success'
           });
           this.designerPoints = 0;
+          this.stopwatchTime = 0;
         } else if (!willReset) {
           swal('Your points are safe.');
           return oldPoints;
@@ -172,11 +210,13 @@ export default class TrackerStore {
     this.accountToAdd.duration = moment.duration(timerTime).format('hh:mm:ss', {
       trim: false
     }); // Set's account's duration
+    this.stopwatchTime += moment.duration(timerTime).asHours();
     this.accountRecord.push(this.accountToAdd); // Pushes the account to add to account record
     this.designerPoints += this.pointsToEarn; // Adds points to designer's point total
     this.serviceNumber = ''; // Resets the service number DOM
     this.designType = 'None'; // Resets the design type DOM
     this.accountToAdd = {
+      id: '',
       serviceNumber: '',
       duration: ''
     };
