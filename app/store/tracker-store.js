@@ -4,9 +4,12 @@ import swal from 'sweetalert';
 import moment from 'moment';
 import 'moment-duration-format';
 
-const dialog = require('electron').remote.dialog;
+const electron = require('electron');
+
+const { dialog } = electron.remote;
+
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
 
 export default class TrackerStore {
   @persist('object')
@@ -61,7 +64,7 @@ export default class TrackerStore {
   // Shows designer's points + to be earned points based on design type
   @computed
   get pointsTotalToEarn() {
-    var category;
+    let category;
     for (category in this.points) {
       if (this.designType === category) {
         return this.designerPoints + this.points[category];
@@ -72,7 +75,7 @@ export default class TrackerStore {
   // Displays the points that the selected design type yields
   @computed
   get pointsToEarn() {
-    var pointCategory;
+    let pointCategory;
     for (pointCategory in this.points) {
       if (this.designType === pointCategory) {
         return this.points[pointCategory];
@@ -166,9 +169,9 @@ export default class TrackerStore {
   // Will end the account's timer and record the duration in ledger
   @action.bound
   onEndAccount = timerTime => {
-    this.accountToAdd.duration = moment
-      .duration(timerTime)
-      .format('hh:mm:ss', { trim: false }); // Set's account's duration
+    this.accountToAdd.duration = moment.duration(timerTime).format('hh:mm:ss', {
+      trim: false
+    }); // Set's account's duration
     this.accountRecord.push(this.accountToAdd); // Pushes the account to add to account record
     this.designerPoints += this.pointsToEarn; // Adds points to designer's point total
     this.serviceNumber = ''; // Resets the service number DOM
@@ -215,15 +218,15 @@ export default class TrackerStore {
           this.serviceNumber.match(/^$/) ||
           this.serviceNumber.match(/[a-zA-Z]/)
         ) {
-          alert('Need a valid service number!');
+          swal('Need a valid service number!');
         } else {
           console.log(`${folderPaths}/${this.serviceNumber}`);
           fs.mkdir(`${folderPaths}/${this.serviceNumber}`, error => {
             if (error) {
               console.log(error);
-              alert("Directory wasn't made.");
+              swal("Directory wasn't made.");
             } else {
-              alert('Directory created!');
+              swal('Directory created!');
             }
           });
           // TODO: Copy templates to new service number folder.

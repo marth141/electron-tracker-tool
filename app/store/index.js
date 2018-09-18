@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable, action } from 'mobx';
 import { create } from 'mobx-persist';
 import { TimerStore } from './timer-store';
 import TrackerStore from './tracker-store';
@@ -25,37 +25,6 @@ class UIStore {
   }
 }
 
-class Counter {
-  @observable
-  count = 0;
-
-  @action.bound
-  increment() {
-    this.count++;
-  }
-
-  @action.bound
-  decrement() {
-    this.count--;
-  }
-
-  @action.bound
-  incrementIfOdd() {
-    if (this.count % 2 === 0) {
-      this.count++;
-    }
-  }
-
-  @action.bound
-  incrementAsync() {
-    setTimeout(() => {
-      runInAction('async add count', () => {
-        this.count++;
-      });
-    }, 1000);
-  }
-}
-
 const store = new Store();
 
 export default store;
@@ -64,9 +33,5 @@ const hydrate = create({
   storage: localStorage,
   jsonify: true
 });
-
-const initialState = {
-  accountRecord: [{ serviceNumber: undefined, duration: undefined }]
-};
 
 hydrate('TrackerStoreMemory', store.trackerStore);
