@@ -42,10 +42,13 @@ export class Timer {
     const minutes = parseInt(seconds / 60, 10);
     const hours = parseInt(minutes / 60, 10);
 
-    return `${format(hours % 60, '00')} : ${format(minutes % 60, '00')} : ${format(
-      seconds % 60,
+    return `${format(hours % 60, '00')} : ${format(
+      minutes % 60,
       '00'
-    )} :  ${format(tenMilliSeconds % 100, '00')}`;
+    )} : ${format(seconds % 60, '00')} :  ${format(
+      tenMilliSeconds % 100,
+      '00'
+    )}`;
   }
 }
 
@@ -115,7 +118,7 @@ export class TimerStore {
   @computed
   get lapData() {
     const data = [];
-    for (let i = 0; i < this.laps.length; i++) {
+    for (let i = 0; i < this.laps.length; i += 1) {
       data.push({
         lap: this.laps[i],
         text: `Lap ${i + 1}`
